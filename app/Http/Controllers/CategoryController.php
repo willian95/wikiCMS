@@ -149,7 +149,7 @@ class CategoryController extends Controller
 
     function exportPdf(){
 
-        $pdf = PDF::loadView('pdf.categories', ["categories" => Category::all()]);
+        $pdf = PDF::loadView('pdfs.categories', ["categories" => Category::all()]);
         return $pdf->download('categories.pdf');
 
     }
