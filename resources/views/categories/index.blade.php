@@ -44,7 +44,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Búsqueda</label>
-                                <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Tracking #, warehouse, usuario, cliente">
+                                <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Categoría">
                             </div>
                         </div>
         
