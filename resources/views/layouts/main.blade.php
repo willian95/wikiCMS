@@ -32,7 +32,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
 		<!--<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />-->
-		<link rel="shortcut icon" type="image/x-icon" href="https://www.laliberty.com.co/coming/assets/img/favicon.png">
+		<link rel="shortcut icon" type="image/x-icon" href="https://www.wikipbl.org/comingSoonAssets/img/favicon.png">
 
 		<script>
 
