@@ -29,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/category/update", "CategoryController@update")->middleware("auth");
     Route::post("/category/delete", "CategoryController@delete")->middleware("auth");
     Route::get("/category/all", "CategoryController@all")->middleware("auth");
+    Route::get("/category/export/csv", "CategoryController@exportCsv")->middleware("auth");  
+    Route::get("/category/export/excel", "CategoryController@exportExcel")->middleware("auth");
+    Route::get("/category/export/pdf", "CategoryController@exportPdf")->middleware("auth");    
     
 
 });

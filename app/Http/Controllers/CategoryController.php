@@ -8,6 +8,10 @@ use App\Http\Requests\CategoryUpdateRequest;
 use Carbon\Carbon;
 use App\Category;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CategoriesExport;
+use PDF;
+
 class CategoryController extends Controller
 {
     
@@ -127,6 +131,26 @@ class CategoryController extends Controller
             return response()->json(["success" => false, "msg" => "Error en el servidor"]);
 
         }
+
+    }
+
+    function exportExcel(){
+
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
+
+    }
+
+    function exportCsv(){
+
+        return Excel::download(new CategoriesExport, 'categories.csv');
+
+
+    }
+
+    function exportPdf(){
+
+        $pdf = PDF::loadView('pdf.categories', ["categories" => Category::all()]);
+        return $pdf->download('categories.pdf');
 
     }
 
