@@ -148,6 +148,13 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</li>
 
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ route('categories.index') }}" class="menu-link">
+										<i class="menu-icon flaticon2-menu-2"></i>
+										<span class="menu-text">Categorías</span>
+									</a>
+								</li>
+
 								
 							</ul>
 							<!--end::Menu Nav-->
