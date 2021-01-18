@@ -39,6 +39,17 @@
                 <!--begin::Body-->
                 <div class="card-body">
                     <!--begin: Datatable-->
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Búsqueda</label>
+                                <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Tracking #, warehouse, usuario, cliente">
+                            </div>
+                        </div>
+        
+                    </div>
+
                     <div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style="">
                         <table class="table">
                             <thead>
@@ -146,7 +157,8 @@
                     pages:0,
                     page:1,
                     showMenu:false,
-                    loading:false
+                    loading:false,
+                    query:""
                 }
             },
             methods:{
@@ -292,6 +304,25 @@
                     }else{
                         $("#menu").removeClass("show")
                         this.showMenu = false
+                    }
+
+                },
+                search(){
+                    
+                    
+                    if(this.query == ""){
+                        
+                        this.fetch()
+
+                    }else{
+                        
+                        axios.post("{{ url('/category/search') }}", {search: this.query, page: this.page}).then(res =>{
+
+                            this.categories = res.data.categories
+                            this.pages = Math.ceil(res.data.categoriesCount / res.data.dataAmount)
+                            //this.setCheckbox()
+                        })
+
                     }
 
                 }

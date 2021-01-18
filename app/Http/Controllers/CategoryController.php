@@ -110,4 +110,24 @@ class CategoryController extends Controller
 
     }
 
+    function search(Request $request){
+
+        try{
+
+            $dataAmount = 20;
+            $skip = ($request->page - 1) * $dataAmount;
+
+            $categories = Category::skip($skip)->take($dataAmount)->where("name", "like", "%".$request->search."%")->get();
+            $categoriesCount = Category::where("name", "like", "%".$request->search."%")->count();
+
+            return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount, "dataAmount" => $dataAmount]);
+
+        }catch(\Exception $e){
+
+            return response()->json(["success" => false, "msg" => "Error en el servidor"]);
+
+        }
+
+    }
+
 }
