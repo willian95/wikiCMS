@@ -20,4 +20,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("/home", "DashboardController@index");
 
+    Route::get("/institutions", "InstitutionsController@index")->name("institutions.index");
+
 });
