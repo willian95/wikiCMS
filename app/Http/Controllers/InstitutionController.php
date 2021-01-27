@@ -31,7 +31,6 @@ class InstitutionController extends Controller
     
             $institution = new Institution;
             $institution->name = $request->name;
-            $institution->image = $request->image;
             $institution->website = $request->website;
             $institution->type = $request->type;
             $institution->status = "approved";
@@ -58,9 +57,6 @@ class InstitutionController extends Controller
     
             $institution = Institution::find($request->id);
             $institution->name = $request->name;
-            if(isset($request->image)){
-                $institution->image = $request->image;
-            }
             
             $institution->website = $request->website;
             $institution->type = $request->type;

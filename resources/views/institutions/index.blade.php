@@ -110,9 +110,6 @@
                                         <span>Name</span>
                                     </th>
                                     <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
-                                        <span>Logo</span>
-                                    </th>
-                                    <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
                                         <span>Status</span>
                                     </th>
                                     <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
@@ -124,9 +121,6 @@
                                 <tr v-for="institution in institutions">
                                     <td class="datatable-cell">
                                         @{{ institution.name }}
-                                    </td>
-                                    <td class="datatable-cell">
-                                        <img style="width: 120px;" :src="institution.image" alt="">
                                     </td>
                                     <td>
                                         @{{ institution.status }}
@@ -191,25 +185,6 @@
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" v-model="name" id="name">
                                         <small style="color: red;" v-if="errors.hasOwnProperty('name')">@{{ errors['name'][0] }}</small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label for="logo">Logo</label>
-                                        <input type="file" class="form-control" id="logo" @change="onImageChange" accept="image/*">
-                                        
-                                        <img id="blah" :src="picturePreview" class="full-image" style="margin-top: 10px; width: 40%">
-
-                                        <div v-if="pictureStatus == 'subiendo'" class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" :style="{'width': `${pictureProgress}%`}">
-                                            @{{ pictureProgress }}%
-                                        </div>
-
-                                        <p v-if="pictureStatus == 'subiendo' && pictureProgress < 100">Uploading</p>
-                                        <p v-if="pictureStatus == 'subiendo' && pictureProgress == 100">Wait a second</p>
-                                        <p v-if="pictureStatus == 'listo' && pictureProgress == 100">Image ready</p>
-
-                                        <small style="color: red;" v-if="errors.hasOwnProperty('image')">@{{ errors['image'][0] }}</small>
-
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -334,14 +309,8 @@
                     showMenu:false,
                     loading:false,
                     query:"",
-                    picture:"",
-                    pictureProgress:"",
-                    pictureStatus:"",
-                    picturePreview:"",
-                    mainImageFileType:"",
                     file:"",
                     status:"",
-                    finalPictureName:""
                 }
             },
             methods:{
@@ -363,49 +332,43 @@
                 },
                 store(){
 
-                    if(this.isImageUploaded()){
+                    this.errors = []
+                    this.loading = true
 
-                        this.errors = []
-                        this.loading = true
-
-                        axios.post("{{ url('institution/store') }}", {name: this.name, image: this.finalPictureName, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain})
-                        .then(res => {
-                            this.loading = false
-                            if(res.data.success == true){
-
-                                swal({
-                                    text: res.data.msg,
-                                    icon: "success"
-                                });
-                                
-                                this.clearInputs()
-
-
-                                this.fetch()
-                            }else{
-
-                                swal({
-                                    text: res.data.msg,
-                                    icon: "error"
-                                });
-
-                            }
-
-                        })
-                        .catch(err => {
+                    axios.post("{{ url('institution/store') }}", {name: this.name, image: this.finalPictureName, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain})
+                    .then(res => {
+                        this.loading = false
+                        if(res.data.success == true){
 
                             swal({
-                                text: "Check some fields, please",
+                                text: res.data.msg,
+                                icon: "success"
+                            });
+                            
+                            this.clearInputs()
+
+
+                            this.fetch()
+                        }else{
+
+                            swal({
+                                text: res.data.msg,
                                 icon: "error"
                             });
 
-                            this.loading = false
-                            this.errors = err.response.data.errors
-                        })
+                        }
 
-                    }
+                    })
+                    .catch(err => {
 
-                    
+                        swal({
+                            text: "Check some fields, please",
+                            icon: "error"
+                        });
+
+                        this.loading = false
+                        this.errors = err.response.data.errors
+                    })
 
                 },
                 update(){
@@ -449,20 +412,6 @@
                     }
 
                     
-
-                },
-                isImageUploaded(){
-
-                    if(this.pictureStatus == "listo"){
-                        return true
-                    }
-
-                    swal({
-                        text: "Image still loading, wait until image is ready",
-                        icon: "error"
-                    });
-
-                    return false
 
                 },
                 clearInputs(){
@@ -585,74 +534,6 @@
                         })
 
                     }
-
-                },
-                onImageChange(e){
-                    this.picture = e.target.files[0];
-
-                    
-                    let files = e.target.files || e.dataTransfer.files;
-                    if (!files.length)
-                        return;
-                    this.createImage(files[0]);
-                },
-                createImage(file) {
-                    this.file = file
-                    this.mainImageFileType = file['type'].split('/')[0]
-
-                    if(this.mainImageFileType == "image"){
-                        this.picturePreview = URL.createObjectURL(this.picture);
-                        
-                        this.uploadMainImage()
-                        let reader = new FileReader();
-                        let vm = this;
-                        reader.onload = (e) => {
-                            vm.picture = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }else{
-                        $("#logo").val(null)
-                        swal({
-                            text:"File have to be an image",
-                            icon:"error"
-                        })
-
-                    }
-
-                    
-                },
-                uploadMainImage(){
-                    this.imageProgress = 0;
-                    let formData = new FormData()
-                    formData.append("file", this.file)
-                    formData.append("upload_preset", this.cloudinaryPreset)
-
-                    var _this = this
-                    this.pictureStatus = "subiendo";
-
-                    var config = {
-                        headers: { "X-Requested-With": "XMLHttpRequest" },
-                        onUploadProgress: function(progressEvent) {
-                            
-                            var progressPercent = Math.round((progressEvent.loaded * 100.0) / progressEvent.total);
-                        
-                            _this.pictureProgress = progressPercent
-                            
-                        }
-                    }
-
-                    axios.post(
-                        this.cloudinaryAPI,
-                        formData,
-                        config                        
-                    ).then(res => {
-                        
-                        this.pictureStatus = "listo";
-                        this.finalPictureName = res.data.secure_url
-
-                    }).catch(err => {
-                        console.log(err)
-                    })
 
                 },
                 changeStatus(status){

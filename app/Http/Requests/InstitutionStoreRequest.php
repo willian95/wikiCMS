@@ -24,7 +24,6 @@ class InstitutionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "image" => "required",
             "name" => "required",
             "website" => "required",
             "type" => "required",
@@ -40,7 +39,6 @@ class InstitutionStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            "image.required" => "Logo is required",
             "name.required" => "Name is required",
             "website.required" => "Website is required",
             "type.required" => "Type is required",
