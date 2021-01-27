@@ -13,25 +13,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "AuthController@index")->middleware("guest");
+Route::get('/', "AuthController@index")->name("login")->middleware("guest");
 Route::post("login", "AuthController@login");
 
 Route::middleware(['auth'])->group(function () {
 
     Route::get("/home", "DashboardController@index");
 
-    Route::get("/institutions", "InstitutionsController@index")->name("institutions.index");
+    Route::get("/institution", "InstitutionController@index")->name("institutions.index");
+    Route::post("institution/store", "InstitutionController@store");
+    Route::post("institution/search", "InstitutionController@search");
+    Route::get("/institution/fetch/{page}", "InstitutionController@fetch");
+    Route::post("/institution/update", "InstitutionController@update");
+    Route::post("/institution/delete", "InstitutionController@delete");
+    Route::get("/institution/all", "InstitutionController@all");
+    Route::get("/institution/export/csv", "InstitutionController@exportCsv");  
+    Route::get("/institution/export/excel", "InstitutionController@exportExcel");
+    Route::get("/institution/export/pdf", "InstitutionController@exportPdf");    
+    Route::post("/institution/change-status", "InstitutionController@changeStatus");
 
-    Route::get("/category", "CategoryController@index")->name("categories.index")->middleware("auth");
-    Route::post("category/store", "CategoryController@store")->middleware("auth");
-    Route::post("category/search", "CategoryController@search")->middleware("auth");
-    Route::get("/category/fetch/{page}", "CategoryController@fetch")->middleware("auth");
-    Route::post("/category/update", "CategoryController@update")->middleware("auth");
-    Route::post("/category/delete", "CategoryController@delete")->middleware("auth");
-    Route::get("/category/all", "CategoryController@all")->middleware("auth");
-    Route::get("/category/export/csv", "CategoryController@exportCsv")->middleware("auth");  
-    Route::get("/category/export/excel", "CategoryController@exportExcel")->middleware("auth");
-    Route::get("/category/export/pdf", "CategoryController@exportPdf")->middleware("auth");    
+    Route::get("/subject", "SubjectController@index")->name("categories.index");
+    Route::post("subject/store", "SubjectController@store");
+    Route::post("subject/search", "SubjectController@search");
+    Route::get("/subject/fetch/{page}", "SubjectController@fetch");
+    Route::post("/subject/update", "SubjectController@update");
+    Route::post("/subject/delete", "SubjectController@delete");
+    Route::get("/subject/all", "SubjectController@all");
+    Route::get("/subject/export/csv", "SubjectController@exportCsv");  
+    Route::get("/subject/export/excel", "SubjectController@exportExcel");
+    Route::get("/subject/export/pdf", "SubjectController@exportPdf");    
+
+    Route::get("/admin-email", "AdminMailController@index")->name("admin.email");
+    Route::post("admin-email/store", "AdminMailController@store");
+    Route::get("/admin-email/fetch", "AdminMailController@fetch");
+    Route::post("/admin-email/update", "AdminMailController@update");
+    Route::post("/admin-email/delete", "AdminMailController@delete");
     
 
 });

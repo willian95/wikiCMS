@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>#</th>
-            <th style="width: 30px;">Nombre</th>
+            <th style="width: 30px;">Name</th>
         </tr>
     </thead>
     <tbody style="font-size: 12px;">

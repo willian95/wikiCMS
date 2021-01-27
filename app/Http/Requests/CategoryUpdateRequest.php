@@ -25,13 +25,15 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             "name" => "required",
+            "institutionType" => "required"
         ];
     }
 
     public function messages()
     {
         return [
-            "name.required" => "El nombre de la categoría es requerido",
+            "name.required" => "Category name is required",
+            "institutionType.required" => "Institution type required"
         ];
     }
 }

@@ -155,6 +155,13 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</li>
 
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ route('admin.email') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Mails Administrativos</span>
+									</a>
+								</li>
+
 								
 							</ul>
 							<!--end::Menu Nav-->

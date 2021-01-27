@@ -6,22 +6,22 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use Carbon\Carbon;
-use App\Category;
+use App\Subject;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CategoriesExport;
 use PDF;
 
-class CategoryController extends Controller
+class SubjectController extends Controller
 {
     
     function index(){
-        return view("categories.index");
+        return view("subjects.index");
     }
 
     function all(){
         
-        return response()->json(["categories" => Category::all()]);
+        return response()->json(["categories" => Subject::all()]);
 
     }
 
@@ -32,14 +32,15 @@ class CategoryController extends Controller
             $slug = str_replace(" ", "-", $request->name);
             $slug = str_replace("/", "-", $slug);
 
-            if(Category::where("slug", $slug)->count() > 1){
+            if(Subject::where("slug", $slug)->count() > 1){
                 $slug = $slug."-".uniqid();
             }
 
-            $category = new Category;
-            $category->name = $request->name;
-            $category->slug = $slug;
-            $category->save();
+            $Subject = new Subject;
+            $Subject->name = $request->name;
+            $Subject->slug = $slug;
+            $Subject->institution_type = $request->institutionType;
+            $Subject->save();
 
             return response()->json(["success" => true, "msg" => "Categoría creada"]);
 
@@ -58,8 +59,8 @@ class CategoryController extends Controller
             $dataAmount = 20;
             $skip = ($page - 1) * $dataAmount;
 
-            $categories = Category::skip($skip)->take($dataAmount)->get();
-            $categoriesCount = Category::count();
+            $categories = Subject::skip($skip)->take($dataAmount)->get();
+            $categoriesCount = Subject::count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount, "dataAmount" => $dataAmount]);
 
@@ -75,11 +76,12 @@ class CategoryController extends Controller
 
         try{
 
-            if(Category::where('name', $request->name)->where('id', '<>', $request->id)->count() == 0){
+            if(Subject::where('name', $request->name)->where('id', '<>', $request->id)->count() == 0){
                 
-                $category = Category::find($request->id);
-                $category->name = $request->name;
-                $category->update();
+                $Subject = Subject::find($request->id);
+                $Subject->name = $request->name;
+                $subject->institution_type = $request->institutionType;
+                $Subject->update();
 
                 return response()->json(["success" => true, "msg" => "Categoría actualizada"]);
             
@@ -101,8 +103,8 @@ class CategoryController extends Controller
 
         try{
 
-            $category = Category::find($request->id);
-            $category->delete();
+            $Subject = Subject::find($request->id);
+            $Subject->delete();
 
             return response()->json(["success" => true, "msg" => "Categoría eliminada"]);
 
@@ -121,8 +123,8 @@ class CategoryController extends Controller
             $dataAmount = 20;
             $skip = ($request->page - 1) * $dataAmount;
 
-            $categories = Category::skip($skip)->take($dataAmount)->where("name", "like", "%".$request->search."%")->get();
-            $categoriesCount = Category::where("name", "like", "%".$request->search."%")->count();
+            $categories = Subject::skip($skip)->take($dataAmount)->where("name", "like", "%".$request->search."%")->get();
+            $categoriesCount = Subject::where("name", "like", "%".$request->search."%")->count();
 
             return response()->json(["success" => true, "categories" => $categories, "categoriesCount" => $categoriesCount, "dataAmount" => $dataAmount]);
 
@@ -144,12 +146,11 @@ class CategoryController extends Controller
 
         return Excel::download(new CategoriesExport, 'categories.csv');
 
-
     }
 
     function exportPdf(){
 
-        $pdf = PDF::loadView('pdfs.categories', ["categories" => Category::all()]);
+        $pdf = PDF::loadView('pdfs.categories', ["categories" => Subject::all()]);
         return $pdf->download('categories.pdf');
 
     }
