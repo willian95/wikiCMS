@@ -198,7 +198,7 @@
                                     <div class="form-group">
                                         <label for="type">Type</label>
                                         <select class="form-control" v-model="type">
-                                            <option value="college">College</option>
+                                            <option value="school">School</option>
                                             <option value="university">University</option>
                                             <option value="organization">Organization</option>
                                         </select>
