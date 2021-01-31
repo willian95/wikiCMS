@@ -144,21 +144,21 @@ License: You must have a valid license purchased only from themeforest(the above
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('institutions.index') }}" class="menu-link">
 										<i class="menu-icon flaticon2-shopping-cart-1"></i>
-										<span class="menu-text">Instituciones</span>
+										<span class="menu-text">Institutions</span>
 									</a>
 								</li>
 
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('categories.index') }}" class="menu-link">
 										<i class="menu-icon flaticon2-menu-2"></i>
-										<span class="menu-text">Categorías</span>
+										<span class="menu-text">Subjects</span>
 									</a>
 								</li>
 
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('admin.email') }}" class="menu-link">
 										<i class="menu-icon flaticon2-send"></i>
-										<span class="menu-text">Mails Administrativos</span>
+										<span class="menu-text">Admin Mail Accounts</span>
 									</a>
 								</li>
 

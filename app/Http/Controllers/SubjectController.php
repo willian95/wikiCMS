@@ -80,7 +80,7 @@ class SubjectController extends Controller
                 
                 $Subject = Subject::find($request->id);
                 $Subject->name = $request->name;
-                $subject->institution_type = $request->institutionType;
+                $Subject->institution_type = $request->institutionType;
                 $Subject->update();
 
                 return response()->json(["success" => true, "msg" => "Categoría actualizada"]);

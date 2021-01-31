@@ -15,7 +15,7 @@
                 <!--begin::Header-->
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Categorías
+                        <h3 class="card-label">Subjects
                     </div>
                     <div class="card-toolbar">
 
@@ -32,12 +32,12 @@
                                     </g>
                                 </svg>
                                 <!--end::Svg Icon-->
-                            </span>Exportar</button>
+                            </span>Export</button>
                             <!--begin::Dropdown Menu-->
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" id="menu">
                                 <!--begin::Navigation-->
                                 <ul class="navi flex-column navi-hover py-2">
-                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Elegir una opción:</li>
+                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
                                     
                                     <li class="navi-item">
                                         <a href="{{ url('/category/export/excel') }}" class="navi-link">
@@ -83,7 +83,7 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span>Nueva Categoría</button>
+                        </span>New Subject</button>
                         <!--end::Button-->
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Búsqueda</label>
+                                <label for="">Search</label>
                                 <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Categoría">
                             </div>
                         </div>
@@ -107,11 +107,15 @@
                             <thead>
                                 <tr >
                                     <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
-                                        <span>Nombre</span>
+                                        <span>Name</span>
                                     </th>
 
                                     <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
-                                        <span>Acciones</span>
+                                        <span>Type</span>
+                                    </th>
+
+                                    <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
+                                        <span>Action</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -119,6 +123,9 @@
                                 <tr v-for="category in categories">
                                     <td class="datatable-cell">
                                         @{{ category.name }}
+                                    </td>
+                                    <td class="datatable-cell">
+                                        @{{ category.institution_type }}
                                     </td>
                                     <td>
                                         <button class="btn btn-info" data-toggle="modal" data-target="#categoryModal" @click="edit(category)"><i class="far fa-edit"></i></button>
@@ -129,7 +136,7 @@
                         </table>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Mostrando página @{{ page }} de @{{ pages }}</div>
+                                <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Showing page @{{ page }} of @{{ pages }}</div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_full_numbers" id="kt_datatable_paginate">
@@ -173,9 +180,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Categoría</label>
+                            <label for="name">Subject</label>
                             <input type="text" class="form-control" id="name" v-model="name">
                             <small v-if="errors.hasOwnProperty('name')">@{{ errors['name'][0] }}</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">Institution type</label>
+                            <select class="form-control" v-model="type">
+                                <option value="school">School</option>
+                                <option value="university">University</option>
+                                <option value="organization">Organization</option>
+                            </select>
+                            <small v-if="errors.hasOwnProperty('type')">@{{ errors['type'][0] }}</small>
                         </div>
                         
                     </div>
@@ -202,6 +219,7 @@
                 return{
                     modalTitle:"Nueva categoría",
                     name:"",
+                    type:"",
                     categoryId:"",
                     action:"create",
                     categories:[],
@@ -218,12 +236,13 @@
                 create(){
                     this.action = "create"
                     this.name = ""
+                    this.type=""
                     this.categoryId = ""
                 },
                 store(){
 
                     this.loading = true
-                    axios.post("{{ url('category/store') }}", {name: this.name})
+                    axios.post("{{ url('subject/store') }}", {name: this.name, institutionType: this.type})
                     .then(res => {
                         this.loading = false
                         if(res.data.success == true){
@@ -234,6 +253,7 @@
                                 icon: "success"
                             });
                             this.name = ""
+                            this.type=""
                             this.fetch()
                         }else{
 
@@ -255,7 +275,7 @@
                 update(){
 
                     this.loading = true
-                    axios.post("{{ url('category/update') }}", {id: this.categoryId, name: this.name})
+                    axios.post("{{ url('subject/update') }}", {id: this.categoryId, name: this.name, institutionType: this.type})
                     .then(res => {
                         this.loading = false
                         if(res.data.success == true){
@@ -266,6 +286,7 @@
                                 icon: "success"
                             });
                             this.name = ""
+                            this.type=""
                             this.categoryId = ""
                             this.fetch()
                             
@@ -290,6 +311,7 @@
                     this.modalTitle = "Editar categoría"
                     this.action = "edit"
                     this.name = category.name
+                    this.type = category.institution_type
                     this.categoryId = category.id
 
                 },
@@ -297,7 +319,7 @@
 
                     this.page = page
 
-                    axios.get("{{ url('category/fetch') }}"+"/"+page)
+                    axios.get("{{ url('subject/fetch') }}"+"/"+page)
                     .then(res => {
 
                         this.categories = res.data.categories
@@ -318,7 +340,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             this.loading = true
-                            axios.post("{{ url('/category/delete/') }}", {id: id}).then(res => {
+                            axios.post("{{ url('/subject/delete/') }}", {id: id}).then(res => {
                                 this.loading = false
                                 if(res.data.success == true){
                                     swal({
@@ -368,7 +390,7 @@
 
                     }else{
                         
-                        axios.post("{{ url('/category/search') }}", {search: this.query, page: this.page}).then(res =>{
+                        axios.post("{{ url('/subject/search') }}", {search: this.query, page: this.page}).then(res =>{
 
                             this.categories = res.data.categories
                             this.pages = Math.ceil(res.data.categoriesCount / res.data.dataAmount)
