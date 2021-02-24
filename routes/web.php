@@ -32,6 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/institution/export/pdf", "InstitutionController@exportPdf");    
     Route::post("/institution/change-status", "InstitutionController@changeStatus");
 
+    Route::get("pending-institution", "PendingInstitutionController@index");
+    Route::get("pending-institution/fetch/{page}", "PendingInstitutionController@fetch");
+    Route::post("pending-institution/approve", "PendingInstitutionController@approve");
+    Route::post("pending-institution/search", "PendingInstitutionController@search");
+
     Route::get("/subject", "SubjectController@index")->name("categories.index");
     Route::post("subject/store", "SubjectController@store");
     Route::post("subject/search", "SubjectController@search");
@@ -49,5 +54,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/admin-email/update", "AdminMailController@update");
     Route::post("/admin-email/delete", "AdminMailController@delete");
     
+    Route::get("/users", "UserController@index");
+    Route::get("/users/fetch/{page}", "UserController@fetch");
+    Route::get("/users/export/pdf", "userController@exportPdf");
+    Route::get("/users/export/excel", "userController@exportExcel");
+    Route::get("/users/export/csv", "userController@exportCsv");
+    Route::post("/users/search", "UserController@search");
+    Route::post("/users/delete", "UserController@delete");
+    Route::post("/users/restore", "UserController@restore");
+
+    Route::get("/projects", "ProjectController@index");
+    Route::get("/projects/fetch/{page}", "ProjectController@fetch");
+    Route::post("/projects/search", "ProjectController@search");
+    Route::post("/projects/delete", "ProjectController@delete");
+    Route::post("/projects/restore", "ProjectController@restore");
 
 });

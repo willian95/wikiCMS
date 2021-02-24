@@ -43,8 +43,24 @@ class User extends Authenticatable
         return $this->belongsTo(Institution::class);
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function pendingInstitution(){
+        return $this->belongsTo(PendingInstitution::class);
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
+
+    public function teacherReport(){
+        return $this->hasMany(teacherReport::class, "teacher_id", "id");
     }
 
 }

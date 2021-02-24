@@ -149,16 +149,37 @@ License: You must have a valid license purchased only from themeforest(the above
 								</li>
 
 								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('pending-institution') }}" class="menu-link">
+										<i class="menu-icon flaticon2-shopping-cart-1"></i>
+										<span class="menu-text">Pending Institutions</span>
+									</a>
+								</li>
+
+								{{--<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('categories.index') }}" class="menu-link">
 										<i class="menu-icon flaticon2-menu-2"></i>
 										<span class="menu-text">Subjects</span>
 									</a>
-								</li>
+								</li>--}}
 
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('admin.email') }}" class="menu-link">
 										<i class="menu-icon flaticon2-send"></i>
 										<span class="menu-text">Admin Mail Accounts</span>
+									</a>
+								</li>
+
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('users') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Users</span>
+									</a>
+								</li>
+
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('projects') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Projects</span>
 									</a>
 								</li>
 

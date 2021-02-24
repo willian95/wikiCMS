@@ -15,7 +15,7 @@
                 <!--begin::Header-->
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Intitutions
+                        <h3 class="card-label">Institutions
                     </div>
                     <div class="card-toolbar">
 
@@ -96,7 +96,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="">Search</label>
-                                <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Intitution">
+                                <input type="text" class="form-control" v-model="query" @keyup="search()" placeholder="Institution">
                             </div>
                         </div>
         
@@ -110,9 +110,6 @@
                                         <span>Name</span>
                                     </th>
                                     <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
-                                        <span>Status</span>
-                                    </th>
-                                    <th class="datatable-cell datatable-cell-sort" style="width: 170px;">
                                         <span>Actions</span>
                                     </th>
                                 </tr>
@@ -123,9 +120,6 @@
                                         @{{ institution.name }}
                                     </td>
                                     <td>
-                                        @{{ institution.status }}
-                                    </td>
-                                    <td>
                                         <button class="btn btn-info" data-toggle="modal" data-target="#institutionModal" @click="edit(institution)"><i class="far fa-edit"></i></button>
                                         <button class="btn btn-secondary" @click="erase(institution.id)"><i class="far fa-trash-alt"></i></button>
                                     </td>
@@ -134,7 +128,7 @@
                         </table>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Mostrando página @{{ page }} de @{{ pages }}</div>
+                                <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Showing page @{{ page }} of @{{ pages }}</div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_full_numbers" id="kt_datatable_paginate">
@@ -253,21 +247,21 @@
                                         <small style="color: red;" v-if="errors.hasOwnProperty('adminPassword2')">@{{ errors['adminPassword2'][0] }}</small>
                                     </div>
                                 </div>
-                                <div class="col-lg-6" v-if="action == 'edit'">
+                                {{--<div class="col-lg-6" v-if="action == 'edit'">
                                     <label>Status: @{{ status }}</label>
 
                                     <button class="btn btn-success" @click="changeStatus('approved')">Approve</button>
                                     <button class="btn btn-danger" @click="changeStatus('rejected')">Reject</button>
 
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Crear</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Actualizar</button>
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Store</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Update</button>
                     </div>
                 </div>
             </div>
@@ -285,13 +279,10 @@
             el: '#dev-institutions',
             data(){
                 return{
-                    cloudinaryAPI:"{{ env('CLOUDINARY_API') }}",
-                    cloudinaryPreset:"{{ env('CLOUDINARY_UPLOAD_PRESET') }}",
                     modalTitle:"New institution",
                     name:"",
-                    type:"college",
+                    type:"school",
                     website:"",
-                    domain:"",
                     institutionId:"",
                     action:"create",
                     institutions:[],
@@ -309,8 +300,6 @@
                     showMenu:false,
                     loading:false,
                     query:"",
-                    file:"",
-                    status:"",
                 }
             },
             methods:{
@@ -325,8 +314,6 @@
                     this.adminName2=""
                     this.adminEmail2=""
                     this.adminPassword2 =""
-                    this.finalPictureName=""
-                    this.pictureStatus = ""
                     this.adminId=""
                     this.adminId2=""
                 },
@@ -335,7 +322,7 @@
                     this.errors = []
                     this.loading = true
 
-                    axios.post("{{ url('institution/store') }}", {name: this.name, image: this.finalPictureName, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain})
+                    axios.post("{{ url('institution/store') }}", {name: this.name, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain})
                     .then(res => {
                         this.loading = false
                         if(res.data.success == true){
@@ -373,45 +360,40 @@
                 },
                 update(){
 
-                    if(this.isImageUploaded()){
-
-                        this.loading = true
-                        axios.post("{{ url('institution/update') }}", {id: this.institutionId, name: this.name, image: this.finalPictureName, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain, adminId: this.adminId, adminId2: this.adminId2})
-                        .then(res => {
-                            this.loading = false
-                            if(res.data.success == true){
-
-                                swal({
-                                    text: res.data.msg,
-                                    icon: "success"
-                                });
-                                this.clearInputs()
-                                this.fetch()
-                                
-                            }else{
-
-                                swal({
-                                    text: res.data.msg,
-                                    icon: "error"
-                                });
-
-                            }
-
-                        })
-                        .catch(err => {
+                    this.loading = true
+                    axios.post("{{ url('institution/update') }}", {id: this.institutionId, name: this.name, adminName: this.adminName, adminEmail: this.adminEmail, adminPassword: this.adminPassword, adminName2: this.adminName2, adminPassword2: this.adminPassword2, adminEmail2: this.adminEmail2, type: this.type, website: this.website, domain: this.domain, adminId: this.adminId, adminId2: this.adminId2})
+                    .then(res => {
+                        this.loading = false
+                        if(res.data.success == true){
 
                             swal({
-                                text: "Check some fields, please",
+                                text: res.data.msg,
+                                icon: "success"
+                            });
+                            this.clearInputs()
+                            this.fetch()
+                            
+                        }else{
+
+                            swal({
+                                text: res.data.msg,
                                 icon: "error"
                             });
 
-                            this.loading = false
-                            this.errors = err.response.data.errors
-                        })
+                        }
 
-                    }
+                    })
+                    .catch(err => {
 
-                    
+                        swal({
+                            text: "Check some fields, please",
+                            icon: "error"
+                        });
+
+                        this.loading = false
+                        this.errors = err.response.data.errors
+                    })
+
 
                 },
                 clearInputs(){
@@ -438,10 +420,6 @@
                     this.institutionId = institution.id
                     this.type = institution.type
                     this.website = institution.website
-                    this.domain = institution.domain
-                    this.picturePreview = institution.image
-                    this.status = institution.status
-                    this.pictureStatus = "listo"
 
                     this.adminId=institution.users[0].id
                     this.adminName=institution.users[0].name
@@ -459,13 +437,18 @@
 
                     this.page = page
 
-                    axios.get("{{ url('institution/fetch') }}"+"/"+page)
-                    .then(res => {
+                    if(this.query == ""){
 
-                        this.institutions = res.data.institutions
-                        this.pages = Math.ceil(res.data.institutionsCount / res.data.dataAmount)
+                        axios.get("{{ url('institution/fetch') }}"+"/"+page)
+                        .then(res => {
 
-                    })
+                            this.institutions = res.data.institutions
+                            this.pages = Math.ceil(res.data.institutionsCount / res.data.dataAmount)
+
+                        })
+                    }else{
+                        this.search()
+                    }
 
                 },
                 erase(id){
@@ -518,7 +501,6 @@
 
                 },
                 search(){
-                    
                     
                     if(this.query == ""){
                         
