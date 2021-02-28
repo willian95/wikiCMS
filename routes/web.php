@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("/email-test", function(){
+
+    $to_email = "rodriguezwillian95@gmail.com";
+    $to_name = "Willian";
+
+    \Mail::send("emails.email", [], function($message) use ($to_name, $to_email) {
+
+        $message->to($to_email, $to_name)->subject("test");
+        $message->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"));
+
+    });
+
+});
+
 Route::get('/', "AuthController@index")->name("login")->middleware("guest");
 Route::post("login", "AuthController@login");
 
