@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/email-test", function(){
 
+    dd(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"), env("MAIL_PASSWORD"));
+
     $to_email = "rodriguezwillian95@gmail.com";
     $to_name = "Willian";
 
