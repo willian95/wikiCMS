@@ -214,4 +214,17 @@ class InstitutionController extends Controller
 
     }
 
+    function getPublicInstitutionUsers($id){
+
+        $users = User::where("institution_id", $id)->where("role_id", 3)->get();
+        return response()->json(["users" => $users]);
+    }
+
+    function getPublicInstitutionTeachers($id){
+
+        $teachers = User::where("institution_id", $id)->where("role_id", 2)->count();
+        return response()->json(["teachers" => $teachers]);
+        
+    }
+
 }

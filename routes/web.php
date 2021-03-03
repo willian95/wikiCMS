@@ -85,4 +85,30 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/projects/delete", "ProjectController@delete");
     Route::post("/projects/restore", "ProjectController@restore");
 
+    Route::get("/reported/users", "ReportedController@usersIndex");
+    Route::get("/reported/users/fetch/{page}", "ReportedController@usersFetch");
+    Route::get("/reported/users/show/{id}", "ReportedController@showUser");
+    Route::post("/reported/users/search", "ReportedController@usersSearch");
+    Route::post("/reported/users/unreport", "ReportedController@unbanUser");
+
+    Route::get("/reported/institutions", "ReportedController@institutionsIndex");
+    Route::get("/reported/institutions/fetch/{page}", "ReportedController@institutionsFetch");
+    Route::get("/reported/institutions/show/{id}", "ReportedController@showInstitution");
+    Route::post("/reported/institutions/search", "ReportedController@institutionsSearch");
+    Route::post("/reported/institutions/unreport", "ReportedController@unbanInstitution");
+
+    Route::get("/reported/projects", "ReportedController@projectsIndex");
+    Route::get("/reported/projects/fetch/{page}", "ReportedController@projectsFetch");
+    Route::get("/reported/projects/show/{id}", "ReportedController@showProject");
+    Route::post("/reported/projects/unreport", "ReportedController@unbanProject");
+
+    Route::get("project/public/my-projects/{page}/{teacherId}", "ProjectController@publicMyProjects");
+    Route::get("project/public/my-public-projects/{page}/{teacherId}", "ProjectController@publicMyProjects");
+    Route::get("project/public/my-follow-projects/{page}/{teacherId}", "ProjectController@publicMyFollowProjects");
+
+    Route::get("/logout", "AuthController@logout");
+
+    Route::get("/institution/public/get-teachers/{id}", "InstitutionController@getPublicInstitutionTeachers");
+    Route::get("/institution/public/get-users/{id}", "InstitutionController@getPublicInstitutionUsers");
+
 });

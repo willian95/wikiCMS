@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    
+
     use SoftDeletes;
 
     public function titles(){
@@ -30,6 +30,10 @@ class Project extends Model
 
         return $this->hasMany(subjectProject::class);
 
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 
     public function user(){

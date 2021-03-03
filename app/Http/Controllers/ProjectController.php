@@ -174,4 +174,76 @@ class ProjectController extends Controller
 
     }
 
+    function publicMyProjects($page, $teacherId){
+
+        $dataAmount = 10;
+        $skip = ($page-1) * $dataAmount;
+
+        $projectQuery = Project::where("user_id", $teacherId)->orderBy("id", "desc")->with(["titles" => function($q){
+                $q->orderBy("id", "desc");
+            }
+        ])->with("user")->with("user.institution")->with("likes");
+
+        $projectQueryCount = Project::where("user_id", $teacherId)->orderBy("id", "desc")->with(["titles" => function($q){
+                $q->orderBy("id", "desc");
+            }
+        ])->with("user")->with("user.institution");
+
+        $projects = $projectQuery->skip($skip)->take($dataAmount)->get();
+        $projectsCount = $projectQueryCount->count();
+
+        return response()->json(["success" => true, "projects" => $projects, "projectsCount" => $projectsCount, "dataAmount" => $dataAmount]);
+
+    }
+
+    function publicMyPublicProjects($page, $teacherId){
+
+        $dataAmount = 10;
+        $skip = ($page-1) * $dataAmount;
+
+        $projectQuery = Project::where("user_id", $teacherId)->where("is_private", 0)->orderBy("id", "desc")->with(["titles" => function($q){
+                $q->orderBy("id", "desc");
+            }
+        ])->with("user")->with("user.institution")->with("likes");
+
+        $projectQueryCount = Project::where("user_id", $teacherId)->where("is_private", 0)->orderBy("id", "desc")->with(["titles" => function($q){
+                $q->orderBy("id", "desc");
+            }
+        ])->with("user")->with("user.institution");
+
+        $projects = $projectQuery->skip($skip)->take($dataAmount)->get();
+        $projectsCount = $projectQueryCount->count();
+
+        return response()->json(["success" => true, "projects" => $projects, "projectsCount" => $projectsCount, "dataAmount" => $dataAmount]);
+
+    }
+
+    function publicMyFollowProjects($page, $teacherId){
+
+        $dataAmount = 10;
+        $skip = ($page-1) * $dataAmount;
+
+        $projectQuery = ProjectShare::where("user_id", $teacherId)
+            ->orderBy("id", "desc")
+            ->with(["project" => function($q){
+                $q->with(["titles" => function($q){
+                    $q->orderBy("id", "desc");
+                }])->with("user")->with("likes");
+            }]);
+
+        $projectQueryCount = ProjectShare::where("user_id", $teacherId)
+            ->orderBy("id", "desc")
+            ->with(["project" => function($q){
+                $q->with(["titles" => function($q){
+                    $q->orderBy("id", "desc");
+                }]);
+            }])->with("user");
+        
+        $projects = $projectQuery->skip($skip)->take($dataAmount)->get();
+        $projectsCount = $projectQueryCount->count();
+
+        return response()->json(["success" => true, "projects" => $projects, "projectsCount" => $projectsCount, "dataAmount" => $dataAmount]);
+
+    }
+
 }

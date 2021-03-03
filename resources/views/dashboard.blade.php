@@ -33,7 +33,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-info font-weight-bold font-size-h6">Instituciones: </a>
+                                        <a href="#" class="text-info font-weight-bold font-size-h6">Institutions: {{ App\Institution::count() }}</a>
                                     </div>
 
                                     <div class="col bg-white px-6 py-8 rounded-xl mr-7">
@@ -48,7 +48,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Profesores:</a>
+                                        <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Teachers: {{ App\User::where("role_id", 2)::count() }}</a>
                                     </div>
                                    
                                 </div>
@@ -70,7 +70,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-info font-weight-bold font-size-h6">Proyectos: </a>
+                                        <a href="#" class="text-info font-weight-bold font-size-h6">Proyectos: {{ App\Project::where("status", "launched")::count() }}</a>
                                     </div>
 
                                     <div class="col">

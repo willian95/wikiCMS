@@ -165,7 +165,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ route('admin.email') }}" class="menu-link">
 										<i class="menu-icon flaticon2-send"></i>
-										<span class="menu-text">Admin Mail Accounts</span>
+										<span class="menu-text">Admin Mail</span>
 									</a>
 								</li>
 
@@ -180,6 +180,27 @@ License: You must have a valid license purchased only from themeforest(the above
 									<a href="{{ url('projects') }}" class="menu-link">
 										<i class="menu-icon flaticon2-send"></i>
 										<span class="menu-text">Projects</span>
+									</a>
+								</li>
+
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('reported/users') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Reported teachers</span>
+									</a>
+								</li>
+
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('reported/projects') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Reported projects</span>
+									</a>
+								</li>
+
+								<li class="menu-item" aria-haspopup="true">
+									<a href="{{ url('reported/institutions') }}" class="menu-link">
+										<i class="menu-icon flaticon2-send"></i>
+										<span class="menu-text">Reported institutions</span>
 									</a>
 								</li>
 
