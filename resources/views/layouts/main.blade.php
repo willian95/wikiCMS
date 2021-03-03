@@ -130,7 +130,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="brand flex-column-auto" id="kt_brand">
 						<!--begin::Logo-->
 						<a href="{{ url('/') }}">
-							<img alt="Logo" src="https://www.laliberty.com.co/assets/img/logo1.png" style="filter: invert(1); width: 100px;" />
+							<img alt="Logo" src="https://www.wikipbl.org/assets/img/logo.svg" style="filter: invert(1); width: 100px;" />
 						</a>
 					</div>
 					<!--end::Brand-->
