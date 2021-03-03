@@ -48,7 +48,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Teachers: {{ App\User::where("role_id", 2)::count() }}</a>
+                                        <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Teachers: {{ App\User::where("role_id", 2)->count() }}</a>
                                     </div>
                                    
                                 </div>
@@ -70,7 +70,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-info font-weight-bold font-size-h6">Proyectos: {{ App\Project::where("status", "launched")::count() }}</a>
+                                        <a href="#" class="text-info font-weight-bold font-size-h6">Proyectos: {{ App\Project::where("status", "launched")->count() }}</a>
                                     </div>
 
                                     <div class="col">
