@@ -1,0 +1,59 @@
+@media (max-width: 767px) {
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+    .menu-template {
+        display: none;
+    }
+    .last-menu {
+        display: block;
+    }
+    .titulo-templates {
+        font-size: 24px;
+    }
+    .card {
+
+        margin-bottom: 10px;
+    }
+    .home-present h1 {
+        font-size: 21px;
+
+    }
+    .search-home {
+
+        width: 100%;
+
+        font-size: 12px;
+    }
+    .abc-home .abc-content {
+        width: 49%;
+     
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media (min-width: 1440px) and (max-width: 1199px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .offcanvas-collapse {
+        position: fixed;
+        top: 82px;
+        bottom: 0;
+        left: 100%;
+        width: 100%;
+        padding-right: 0rem;
+        padding-left: 0rem;
+        overflow-y: auto;
+        visibility: hidden;
+        background-color: #fff;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.3s;
+        transition-property: left, visibility;
+    }
+}
+
+@media (min-width: 2560px) and (max-width: 2560px) {
+}
