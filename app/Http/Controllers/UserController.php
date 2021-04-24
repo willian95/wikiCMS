@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\UsersExport;
 use App\User;
 use App\PDF;
 use Excel;
@@ -97,13 +98,13 @@ class UserController extends Controller
 
     function exportExcel(){
 
-        return Excel::download(new InstitutionsExport, 'institutions.xlsx');
+        return Excel::download(new UsersExport, 'users.xlsx');
 
     }
 
     function exportCsv(){
 
-        return Excel::download(new InstitutionsExport, 'institutions.csv');
+        return Excel::download(new UsersExport, 'users.csv');
 
     }
 
