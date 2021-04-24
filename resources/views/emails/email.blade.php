@@ -102,9 +102,19 @@ td .es-button-border-2:hover {
 
 
                      <tr style="border-collapse:collapse;"> 
-                      <td align="center" style="padding:0;Margin:0;padding-top:20px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#010101;"></span> <span style="font-size:15px;">Something</span><br></p></td> 
+                      <td align="center" style="padding:0;Margin:0;"><h1 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:tahoma, verdana, segoe, sans-serif;font-size:20px;font-style:normal;font-weight:bold;color:#0c4572;">Account created</h1></td> 
+                     </tr> 
+                     <tr style="border-collapse:collapse;"> 
+                      <td align="center" style="padding:0;Margin:0;padding-top:20px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#010101;"></span> <span style="font-size:15px;">Welcome and thank you for being part of wikiPBL! Please log in with the following email: {{ $email }} and password: {{ $password }}</span><br></p>
 
+                        <p><strong>Please change/update your password ASAP!</strong></p>
+                      
+                      </td> 
 
+                    
+                      <tr style="border-collapse:collapse;"> 
+                      <td align="center" style="padding:10px;Margin:0;"><span class="es-button-border es-button-border-2" style="border-style:solid;border-color:#2CB543;background:#0c4572;border-width:0px;display:inline-block;border-radius:20px;width:auto;"><a href="https://www.wikipbl.org" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:16px;color:#FFFFFF;border-style:solid;border-color:#0c4572;border-width:10px 20px 10px 20px;display:inline-block;background:#0c4572;border-radius:20px;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;">Login</a></span></td> 
+                     </tr> 
 
                      </tr> 
                      

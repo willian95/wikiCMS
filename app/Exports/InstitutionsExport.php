@@ -14,7 +14,9 @@ class InstitutionsExport implements FromView
     public function view(): View
     {
         return view('excels.institutions', [
-            'institutions' => Institution::with("users")->get()
+            'institutions' => Institution::with(["users" => function($q){
+                $q->where("role_id", 3);   
+            }])->get()
         ]);
     }
 }

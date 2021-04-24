@@ -17,7 +17,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 1;
             $assestment->name = "Sustained Inquiry";
-            $assestment->icon = "fa fa-glass";
+            $assestment->icon = url('/')."/assets/img/enquiry.png";
             $assestment->save();
         }
 
@@ -25,7 +25,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 2;
             $assestment->name = "Authenticity";
-            $assestment->icon = "fa fa-edit";
+            $assestment->icon = url('/')."/assets/img/auten.png";
             $assestment->save();
         }
 
@@ -33,7 +33,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 3;
             $assestment->name = "Student voice & choice";
-            $assestment->icon = "fa fa-tint";
+            $assestment->icon = url('/')."/assets/img/voice.png";
             $assestment->save();
         }
 
@@ -41,7 +41,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 4;
             $assestment->name = "Reflection";
-            $assestment->icon = "fa fa-map-marker";
+            $assestment->icon = url('/')."/assets/img/reflection.png";
             $assestment->save();
         }
 
@@ -49,7 +49,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 5;
             $assestment->name = "Critique & Revision";
-            $assestment->icon = "fa fa-map-marker";
+            $assestment->icon = url('/')."/assets/img/critique.png";
             $assestment->save();
         }
 
@@ -57,7 +57,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 6;
             $assestment->name = "Public product";
-            $assestment->icon = "fa fa-plane";
+            $assestment->icon = url('/')."/assets/img/publicproduct.png";
             $assestment->save();
         }
 
@@ -65,7 +65,7 @@ class AssestmentPointTypeSeeder extends Seeder
             $assestment = new AssestmentPointType;
             $assestment->id = 7;
             $assestment->name = "Challenging problem or question";
-            $assestment->icon = "fa fa-magnet";
+            $assestment->icon = url('/')."/assets/img/problem.png";
             $assestment->save();
         }
 

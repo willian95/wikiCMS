@@ -45,7 +45,7 @@
                             {{ $institution["users"][0]["email"] }}
                         </td>
                     @endif
-                    @if($institution["users"][1])
+                    @if(count($institution["users"]) > 1)
                         <td>
                             {{ $institution["users"][1]["name"] }}
                         </td>

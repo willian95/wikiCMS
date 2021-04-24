@@ -7,7 +7,6 @@
             <th>#</th>
             <th>Name</th>
             <th>Website</th>
-            <th>Domain</th>
             <th>Type</th>
             <th>Admin Name</th>
             <th>Admin Email</th>
@@ -26,9 +25,6 @@
                     {{ $institution->name }}
                 </td>
                 <td>
-                    {{ $institution->domain }}
-                </td>
-                <td>
                     {{ $institution->type }}
                 </td>
                 <td>
@@ -45,7 +41,7 @@
                             {{ $institution["users"][0]["email"] }}
                         </td>
                     @endif
-                    @if($institution["users"][1])
+                    @if(count($institution["users"]) > 1)
                         <td>
                             {{ $institution["users"][1]["name"] }}
                         </td>

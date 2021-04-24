@@ -260,7 +260,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Store</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Create</button>
                         <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Update</button>
                     </div>
                 </div>

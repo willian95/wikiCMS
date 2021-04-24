@@ -70,7 +70,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="text-info font-weight-bold font-size-h6">Proyectos: {{ App\Project::where("status", "launched")->count() }}</a>
+                                        <a href="#" class="text-info font-weight-bold font-size-h6">Projects: {{ App\Project::where("status", "launched")->count() }}</a>
                                     </div>
 
                                     <div class="col">

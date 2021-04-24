@@ -85,6 +85,23 @@ class InstitutionController extends Controller
         $user->role_id = 3;
         $user->save();
 
+        $this->sendAdminEmail($user, $password);
+
+    }
+
+    function sendAdminEmail($user, $password){
+
+        $to_name = $user->name;
+        $to_email = $user->email;
+        $data = ["email" => $user->email, "password" => $password];
+
+        \Mail::send("emails.email", $data, function($message) use ($to_name, $to_email) {
+
+            $message->to($to_email, $to_name)->subject("Welcome to wikiPBL!");
+            $message->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"));
+
+        });
+
     }
 
     function updateUser($id, $name, $email, $password, $institutionId){
@@ -191,7 +208,9 @@ class InstitutionController extends Controller
 
     function exportPdf(){
 
-        $pdf = PDF::loadView('pdfs.institutions', ["institutions" => Institution::with("users")->get()]);
+        $pdf = PDF::loadView('pdfs.institutions', ["institutions" => Institution::with(["users" => function($q){
+            $q->where("role_id", 3);   
+        }])->get()]);
         return $pdf->download('institutions.pdf');
 
     }
