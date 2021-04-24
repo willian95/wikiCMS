@@ -148,7 +148,7 @@
                     
                     swal({
                         title: "Are you sure?",
-                        text: "You will block this project!",
+                        text: "You will delete this project and all the users involved in this wikiPBL project won't have access while you review it! You will have the option to activate this wikiPBL project as well.",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

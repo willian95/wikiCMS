@@ -244,7 +244,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div id="user-options-menu" class="dropdown-menu" style="right: 0; float:right !important; left: unset; padding-left: 1rem; padding-bottom: 1rem;">
 										<!--begin:Header-->
 										
-											<a href="{{ url('/logout') }}" class="btn btn-success btn-sm font-weight-bold font-size-sm mt-2">Cerrar sesión</a>
+											<a href="{{ url('/logout') }}" class="btn btn-success btn-sm font-weight-bold font-size-sm mt-2">Logout</a>
 										
 										<!--end:Nav-->
 									</div>

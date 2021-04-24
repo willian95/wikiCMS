@@ -220,7 +220,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Actualizar</button>
                     </div>
                 </div>
@@ -317,7 +317,7 @@
                     
                     swal({
                         title: "Are you sure?",
-                        text: "You will block this user!",
+                        text: "You will delete this user! You will have the option to activate this user as well.",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

@@ -13,7 +13,7 @@
                 <!--begin::Header-->
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Correos Administrativos
+                        <h3 class="card-label">Admin emails
                     </div>
                     <div class="card-toolbar">
                        
@@ -29,7 +29,7 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span>Nuevo Correo</button>
+                        </span>New admin email</button>
                         <!--end::Button-->
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                     </th>
 
                                     <th class="datatable-cell datatable-cell-sort">
-                                        <span style="width: 130px;">Acciones</span>
+                                        <span style="width: 130px;"></span>
                                     </th>
                                 </tr>
                             </thead>
@@ -83,16 +83,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="email">Correo</label>
+                            <label for="email">Email</label>
                             <input type="text" class="form-control" id="email" v-model="email">
                             <small v-if="errors.hasOwnProperty('email')">@{{ errors['email'][0] }}</small>
                         </div>
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Crear</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Actualizar</button>
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="store()" v-if="action == 'create'">Create</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="update()" v-if="action == 'edit'">Update</button>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
             el: '#dev-mails',
             data(){
                 return{
-                    modalTitle:"Nuevo correo administrativo",
+                    modalTitle:"New admin email",
                     email:"",
                     emailId:"",
                     action:"create",
@@ -137,8 +137,8 @@
                         if(res.data.success == true){
 
                             swal({
-                                title: "Perfecto!",
-                                text: "Haz creado un correo Administrativo!",
+                                title: "Great!",
+                                text: "Admin email created!",
                                 icon: "success"
                             });
                             this.email = ""
@@ -146,8 +146,8 @@
                         }else{
 
                             swal({
-                                title: "Lo sentimos!",
-                                text: res.data.msg,
+                                title: "We're sorry!",
+                                text: "Something went wrong",
                                 icon: "error"
                             });
 
@@ -169,8 +169,8 @@
                         if(res.data.success == true){
 
                             swal({
-                                title: "Excelente!",
-                                text: "Haz actualizado un correo adminsitrativo!",
+                                title: "Great!",
+                                text: "Admin email updated!",
                                 icon: "success"
                             });
                             this.email = ""
@@ -180,8 +180,8 @@
                         }else{
 
                             swal({
-                                title: "Lo sentimos!",
-                                text: res.data.msg,
+                                title: "We're sorry!",
+                                text: "Something went wrong",
                                 icon: "error"
                             });
 
@@ -198,7 +198,7 @@
 
                 },
                 edit(mail){
-                    this.modalTitle = "Editar correo administrativo"
+                    this.modalTitle = "Edit admin email"
                     this.action = "edit"
                     this.email = mail.email
                     this.emailId = mail.id
@@ -216,8 +216,8 @@
                 erase(id){
                     
                     swal({
-                        title: "¿Estás seguro?",
-                        text: "Eliminarás este correo administrativo!",
+                        title: "Are you sure?",
+                        text: "You will delete this admin email!",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -229,16 +229,16 @@
                                 this.loading = false
                                 if(res.data.success == true){
                                     swal({
-                                        title: "Genial!",
-                                        text: "Formato eliminado!",
+                                        title: "Great!",
+                                        text: "Admin email deleted!",
                                         icon: "success"
                                     });
                                     this.fetch()
                                 }else{
 
                                     swal({
-                                        title: "Lo sentimos!",
-                                        text: res.data.msg,
+                                        title: "We're sorry!",
+                                        text: "Something went wrong",
                                         icon: "error"
                                     });
 

@@ -178,7 +178,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary font-weight-bold"  @click="approve()" v-if="action == 'create'">Store</button>
+                        <button type="button" class="btn btn-primary font-weight-bold"  @click="approve()" v-if="action == 'create'">Create</button>
                     </div>
                 </div>
             </div>
