@@ -72,9 +72,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get("/users", "UserController@index");
     Route::get("/users/fetch/{page}", "UserController@fetch");
-    Route::get("/users/export/pdf", "userController@exportPdf");
-    Route::get("/users/export/excel", "userController@exportExcel");
-    Route::get("/users/export/csv", "userController@exportCsv");
+    Route::get("/users/export/pdf", "UserController@exportPdf");
+    Route::get("/users/export/excel", "UserController@exportExcel");
+    Route::get("/users/export/csv", "UserController@exportCsv");
     Route::post("/users/search", "UserController@search");
     Route::post("/users/delete", "UserController@delete");
     Route::post("/users/restore", "UserController@restore");
