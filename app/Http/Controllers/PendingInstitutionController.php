@@ -53,7 +53,7 @@ class PendingInstitutionController extends Controller
             $pendingInstitution = PendingInstitution::find($request->pendingInstitution);
             $pendingInstitution->delete();
 
-            return response()->json(["success"=> true, "msg" => "Pending Institution approved"]);
+            return response()->json(["success"=> true, "msg" => "Institution approved"]);
             
         }catch(\Exception $e){
 

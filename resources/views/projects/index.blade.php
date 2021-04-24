@@ -49,7 +49,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="project in projects" v-if="project.titles.length > 0">
+                                <tr v-for="project in projects">
                                     <td class="datatable-cell">
                                         <span>@{{ project.titles[0].title }}</span>
                                     </td>

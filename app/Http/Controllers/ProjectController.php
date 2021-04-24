@@ -23,14 +23,14 @@ class ProjectController extends Controller
             $dataAmount = 20;
             $skip = ($page - 1) * $dataAmount;
 
-            $projects = Project::skip($skip)->take($dataAmount)->withTrashed()->where("status", "launched")->with("user")->with(["titles" => function($q){
+            $projects = Project::skip($skip)->take($dataAmount)->withTrashed()->where("status", "launched")->with("user", "titles")->whereHas("titles", function($q){
                 $q->orderBy("id", "desc")->where("status", "launched")->take(1);
                 }
-            ])->get();
-            $projectsCount = Project::with(["titles" => function($q){
+            )->get();
+            $projectsCount = Project::whereHas("titles", function($q){
                 $q->orderBy("id", "desc")->where("status", "launched")->take(1);
                 }
-            ])->withTrashed()->with("user")->where("status", "launched")->count();
+            )->withTrashed()->with("user")->where("status", "launched")->count();
 
             return response()->json(["success" => true, "projects" => $projects, "projectsCount" => $projectsCount, "dataAmount" => $dataAmount]);
 
