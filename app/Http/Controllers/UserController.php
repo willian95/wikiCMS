@@ -91,7 +91,7 @@ class UserController extends Controller
 
     function exportPdf(){
 
-        $pdf = PDF::loadView('pdfs.users', ["users" => User::where("role_id", ">", "1")->with("institution", "pendingInstitution", "country", "state")->get()]);
+        $pdf = PDF::loadView('pdfs.users', ["users" => User::where("role_id", ">", "1")->whereHas("institution")->with("institution", "pendingInstitution", "country", "state")->get()]);
         return $pdf->download('users.pdf');
 
     }
