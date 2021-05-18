@@ -118,16 +118,16 @@
                                 <div class="dataTables_paginate paging_full_numbers" id="kt_datatable_paginate">
                                     <ul class="pagination">
                                         <li class="paginate_button page-item previous disabled" id="kt_datatable_previous" v-if="page > 1">
-                                            <a href="#" aria-controls="kt_datatable" data-dt-idx="1" tabindex="0" class="page-link">
+                                            <a style="cursor:pointer" aria-controls="kt_datatable" data-dt-idx="1" tabindex="0" class="page-link">
                                                 <i class="ki ki-arrow-back"></i>
                                             </a>
                                         </li>
                                         <li class="paginate_button page-item active" v-for="index in pages">
-                                            <a href="#" aria-controls="kt_datatable" tabindex="0" class="page-link":key="index" @click="fetch(index)" >@{{ index }}</a>
+                                            <a style="cursor:pointer" aria-controls="kt_datatable" tabindex="0" class="page-link":key="index" @click="fetch(index)" >@{{ index }}</a>
                                         </li>
                                         
                                         <li class="paginate_button page-item next" id="kt_datatable_next" v-if="page < pages" href="#">
-                                            <a href="#" aria-controls="kt_datatable" data-dt-idx="7" tabindex="0" class="page-link" @click="fetch(page + 6)">
+                                            <a style="cursor:pointer" aria-controls="kt_datatable" data-dt-idx="7" tabindex="0" class="page-link" @click="fetch(page + 6)">
                                                 <i class="ki ki-arrow-next"></i>
                                             </a>
                                         </li>
