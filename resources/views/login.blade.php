@@ -64,11 +64,11 @@ const app = new Vue({
 
                     if (res.data.success == true) {
 
-                        swal({
+                        /*swal({
                             title: "Excelente!",
                             text: res.data.msg,
                             icon: "success"
-                        });
+                        });*/
                         this.email = ""
                         this.password = ""
 

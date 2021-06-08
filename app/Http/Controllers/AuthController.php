@@ -17,21 +17,21 @@ class AuthController extends Controller
         
         try{
 
-            $user = User::where("email", $request->email)->first();
+            $user = User::where("email", $request->email)->where("role_id", 1)->first();
             if($user){
 
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
                     $url = redirect()->intended()->getTargetUrl();
-                    return response()->json(["success" => true, "msg" => "Usuario autenticado", "role_id" => Auth::user()->role_id, "url" => $url]);
+                    return response()->json(["success" => true, "msg" => "User authenticated", "role_id" => Auth::user()->role_id, "url" => $url]);
                 }
 
             }else{
-                return response()->json(["success" => false, "msg" => "Usuario no encontrado"]);
+                return response()->json(["success" => false, "msg" => "User not found"]);
             }
 
         }catch(\Exception $e){
 
-            return response()->json(["success" => false, "err" => $e->getMessage(), "ln" => $e->getLine(), "msg" => "Hubo un problema"]);
+            return response()->json(["success" => false, "err" => $e->getMessage(), "ln" => $e->getLine(), "msg" => "Something went wrong"]);
         }
     }
 
