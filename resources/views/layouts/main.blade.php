@@ -127,10 +127,10 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--begin::Aside-->
 				<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 					<!--begin::Brand-->
-					<div class="brand flex-column-auto" id="kt_brand">
+					<div class="brand flex-column-auto bg-white" id="kt_brand">
 						<!--begin::Logo-->
 						<a href="{{ url('/') }}">
-							<img alt="Logo" src="https://www.wikipbl.org/assets/img/logo.svg" style="filter: invert(1); width: 100px;" />
+							<img alt="Logo" src="https://www.wikipbl.org/assets/img/logo.svg" class="w-100" />
 						</a>
 					</div>
 					<!--end::Brand-->
