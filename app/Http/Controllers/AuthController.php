@@ -23,6 +23,8 @@ class AuthController extends Controller
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
                     $url = redirect()->intended()->getTargetUrl();
                     return response()->json(["success" => true, "msg" => "User authenticated", "role_id" => Auth::user()->role_id, "url" => $url]);
+                }else{
+                    return response()->json(["success" => false, "msg" => "User not found"]);
                 }
 
             }else{
